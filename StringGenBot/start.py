@@ -12,27 +12,27 @@ async def start(bot: Client, msg: Message):
     me2 = (await bot.get_me()).mention
     await bot.send_message(
         chat_id=msg.chat.id,
-        text=f"""¤¦ اهلا بـك عزيـزي 
+        text=f"""¤¦ بەخێربێیت بەڕێز 
 
-¤¦ يمكنك استـخـراج التالـي
+¤¦ دەتوانن ئەمانەی خوارەوە دەربهێنن
 
-¤¦ تيرمڪس تليثون للحسابات
+¤¦ تێلیتۆنی تێرموکس بۆ ئەکاونتەکان
 
-¤¦ تيرمـكـس تليثون للبوتـات
+¤¦ تێرمیکس تێلێتۆن بۆ بۆتەکان
 
-¤¦ بايـروجـرام مـيوزك للحسابات
+¤¦ پایرۆگرام میوزیک بۆ ئەکاونتەکان
 
-¤¦ بايـروجـرام مـيوزك للبوتات
+¤¦ پایرۆگرام میوزیک بۆ بۆتەکان
 
-¤¦ تم انشاء البوت بواسطة [ㅤ𓏺 ժᥱ᥎ ᥉ᥲ️ꪔᎥٍᖇ . 🕷 ˼](https://t.me/DEV_SAMIR)""",
+¤¦ دروستكراوی بۆت لە لایە ن [ㅤSARKAUT](https://t.me/DEV_SAMIR)""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(text="إضغط لبدا استخراج الكود", callback_data="generate")
+                    InlineKeyboardButton(text="بۆ دەرهێنانی کۆدەکە کلیک بکە", callback_data="generate")
                 ],
                 [
-                    InlineKeyboardButton("❣️ sᴏᴜʀᴄᴇ ❣️", url="https://t.me/FTTUTY"),
-                    InlineKeyboardButton("🥀 ᴅᴇᴠᴇʟᴏᴩᴇʀ 🥀", user_id=OWNER_ID)
+                    InlineKeyboardButton("جە ناڵ بۆت", url="https://t.me/ChanallBots"),
+                    InlineKeyboardButton("خاوە ن بۆت", user_id=OWNER_ID)
                 ]
             ]
         ),
