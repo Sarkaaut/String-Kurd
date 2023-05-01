@@ -31,22 +31,22 @@
     "OWNER_ID": {
       "description": "Telegram id of the person who will known as owner of the bot.",
       "required": true,
-      "value": ""
+      "value": "5789819429"
     },
     "MONGO_DB_URI": {
       "description": "Get this value from cloud.mongodb.com",
       "required": true,
-      "value": ""
+      "value": "61848c8684909c1036c2650e"
     },
     "MUST_JOIN": {
       "description": "Username of a group or channel for which you want to set force sub.(without @)",
       "required": true,
-      "value": "DevilsHeavenMF"
+      "value": "ChanallBots"
     },
     "BOT_TOKEN": {
       "description": "Get this value from @BotFather",
       "required": true,
-      "value": ""
+      "value": "6194586002:AAHYz1Mt9DU7gx8DKaWQcPwi7uu8hb_gcbk"
     }
   }
 }
