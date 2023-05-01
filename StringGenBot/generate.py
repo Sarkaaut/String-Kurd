@@ -119,7 +119,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             if await cancelled(phone_code_msg):
                 return
     except TimeoutError:
-        await msg.reply(" تم انتهاء وقت الجلسه 10 دقائق يرجى اعاده استخراج الجلسه من البدايه .", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply(" دانیشتنەکە کاتەکەی تەواو بوو 10 خولەکە تکایە دانیشتنەکە لە سەرەتاوە دووبارە دەربهێنە .", reply_markup=InlineKeyboardMarkup(gen_button))
         return
     if not is_bot:
         phone_code = phone_code_msg.text.replace(" ", "")
@@ -129,10 +129,10 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             else:
                 await client.sign_in(phone_number, code.phone_code_hash, phone_code)
         except (PhoneCodeInvalid, PhoneCodeInvalidError):
-            await msg.reply("» ᴛʜᴇ ᴏᴛᴩ ʏᴏᴜ'ᴠᴇ sᴇɴᴛ ɪs **ᴡʀᴏɴɢ.**\n\nᴩʟᴇᴀsᴇ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", reply_markup=InlineKeyboardMarkup(gen_button))
+            await msg.reply("» ئەو otp ەی کە تۆ ناردوتە ** هەڵە.**\n\nتکایە دەست بکە بە دروستکردنی دانیشتنەکەت", reply_markup=InlineKeyboardMarkup(gen_button))
             return
         except (PhoneCodeExpired, PhoneCodeExpiredError):
-            await msg.reply("» ᴛʜᴇ ᴏᴛᴩ ʏᴏᴜ'ᴠᴇ sᴇɴᴛ ɪs **ᴇxᴩɪʀᴇᴅ.**\n\nᴩʟᴇᴀsᴇ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", reply_markup=InlineKeyboardMarkup(gen_button))
+            await msg.reply("» ئەو otpی کە ناردوتە ئەوەیە ** بەسەرچوو.**\n\nتکایە دەست بکەرەوە بە دروستکردنی دانیشتنەکەت.", reply_markup=InlineKeyboardMarkup(gen_button))
             return
         except (SessionPasswordNeeded, SessionPasswordNeededError):
             try:
