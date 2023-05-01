@@ -110,12 +110,12 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
         await msg.reply("» هی تۆ **API_ID** و **API_HASH** تێکەڵکردن لەگەڵ سیستەمی ئەپەکانی تەلەگرامدا ناگونجێت. \n\nتکایە دەست بکە بە دروستکردنی دانیشتنەکەت", reply_markup=InlineKeyboardMarkup(gen_button))
         return
     except (PhoneNumberInvalid, PhoneNumberInvalidError):
-        await msg.reply("» ᴛʜᴇ **ᴩʜᴏɴᴇ_ɴᴜᴍʙᴇʀ** ʏᴏᴜ'ᴠᴇ sᴇɴᴛ ᴅᴏᴇsɴ'ᴛ ʙᴇʟᴏɴɢ ᴛᴏ ᴀɴʏ ᴛᴇʟᴇɢʀᴀᴍ ᴀᴄᴄᴏᴜɴᴛ.\n\nᴩʟᴇᴀsᴇ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("» لە ** ژمارەی تەلەفۆن** تۆ نێردراویت سەر بە هیچ ئاکاونتیکی تەلەگرام نییە\n\nدەست بکە بە دروستکردنی دانیشتنەکەت", reply_markup=InlineKeyboardMarkup(gen_button))
         return
     try:
         phone_code_msg = None
         if not is_bot:
-            phone_code_msg = await bot.ask(user_id, "[ارسل الكود زي اللي في الصوره](https://telegra.ph/file/da1af082c6b754959ab47.jpg)» 🔍من فضلك افحص حسابك بالتليجرام وتفقد الكود من حساب اشعارات التليجرام. إذا كان\n  هناك تحقق بخطوتين( المرور ) ، أرسل كلمة المرور هنا بعد ارسال كود الدخول بالتنسيق أدناه.- اذا كانت كلمة المرور او الكود  هي\n 12345 يرجى ارسالها بالشكل التالي 1 2 3 4 5 مع وجود مسـافـات بين الارقام اذا احتجت مساعدة @DEV_SAMIR.", filters=filters.text, timeout=600)
+            phone_code_msg = await bot.ask(user_id, "[کۆدەکە بنێرە وەک لە وێنەکەدا دیارە](https://telegra.ph/file/da1af082c6b754959ab47.jpg)» 🔍 تکایە ئەکاونتی تێلێگرامەکەت بپشکنە و کۆدەکە لە ئەکاونتی ئاگادارکردنەوەکانی تەلەگرامەکەتەوە بزانە. ئەگەر وا بووبێت\n دوو هەنگاوی پشتڕاستکردنەوە هەیە( پاسپۆرد ) ، دوای ناردنی کۆدی دەستگەیشتن بەم فۆرماتەی خوارەوە وشەی نهێنی لێرە بنێرە.-ئەگەر وشەی نهێنی یان کۆدەکە بێت\n 12345 تکایە بەم فۆرماتە بنێرن 1 2 3 4 5 لەگەڵ بۆشایی نێوان ژمارەکان ئەگەر پێویستت بە یارمەتی بوو @SARKAUT", filters=filters.text, timeout=600)
             if await cancelled(phone_code_msg):
                 return
     except TimeoutError:
