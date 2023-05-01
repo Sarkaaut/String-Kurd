@@ -25,23 +25,23 @@ import config
 
 
 
-ask_ques = "**• ذا كنت تريد تنصب ميوزك اختار بايروجرام\n\n• واذا تريد تنصب تليثون فأختار تيرمڪس\n\n• يوجد استخرجات جلسات لي البوتات**"
+ask_ques = "**• ئەگەر دەتەوێت مۆسیقاکەت دابمەزرێنیت ئەوا بە پیرۆگرام هەڵبژێرە\n\n• ئەگەر دەتەوێت تەلەتۆن دابنێیت، تیرموکس هەڵبژێرە\n\n• وەرگیراوەکانی دانیشتن هەیە بۆ بۆتەکان**"
 
 
 buttons_ques = [
     [
-        InlineKeyboardButton("بايروجرام 🥀", callback_data="pyrogram"),
-        InlineKeyboardButton("تلثيون 🥀", callback_data="telethon"),
+        InlineKeyboardButton("پیرۆگرام", callback_data="pyrogram"),
+        InlineKeyboardButton("تیلیتۆن", callback_data="telethon"),
     ],
     [
-        InlineKeyboardButton("بايروجرام بوت 🥀", callback_data="pyrogram_bot"),
-        InlineKeyboardButton("تلثيون بوت 🥀", callback_data="telethon_bot"),
+        InlineKeyboardButton("پایرۆگرام بۆت", callback_data="pyrogram_bot"),
+        InlineKeyboardButton("تیلیتۆن بۆت", callback_data="telethon_bot"),
     ],
 ]
 
 gen_button = [
     [
-        InlineKeyboardButton(text=" اضغط لبدا استخراج الكود 🥀 ", callback_data="generate")
+        InlineKeyboardButton(text=" بۆ دەرهێنانی کۆدەکە کلیک بکە ", callback_data="generate")
     ]
 ]
 
@@ -55,14 +55,14 @@ async def main(_, msg):
 
 async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bool = False):
     if telethon:
-        ty = "ᴛᴇʟᴇᴛʜᴏɴ"
+        ty = "تیلیتۆن"
     else:
-        ty = "ᴩʏʀᴏɢʀᴀᴍ"
+        ty = "پایرۆگرام"
     if is_bot:
-        ty += " ʙᴏᴛ"
-    await msg.reply(f"» ⚡ ¦ بـدء إنـشـاء جـلسـة **{ty}** ...")
+        ty += "بۆت"
+    await msg.reply(f"» ⚡ ¦ دانیشتنێک دروست بکە **{ty}** ...")
     user_id = msg.chat.id
-    api_id_msg = await bot.ask(user_id, "🎮حسنـا قم بأرسال الـ API_ID\n\nاضغط /skip عشان تكمل بالموجدين", filters=filters.text)
+    api_id_msg = await bot.ask(user_id, "باشە، بنێرە API_ID\n\nکلیک بکە/skip بەمەبەستی تەواوکردنی کۆدە کە", filters=filters.text)
     if await cancelled(api_id_msg):
         return
     if api_id_msg.text == "/skip":
@@ -72,24 +72,24 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
         try:
             api_id = int(api_id_msg.text)
         except ValueError:
-            await api_id_msg.reply("**ᴀᴩɪ_ɪᴅ** ᴍᴜsᴛ ʙᴇ ᴀɴ ɪɴᴛᴇɢᴇʀ, sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
+            await api_id_msg.reply("**API_ID** دەبێت ژمارەیەکی تەواو بێت، دووبارە دەست بە دروستکردنی دانیشتنەکەت بکەرەوە", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
             return
-        api_hash_msg = await bot.ask(user_id, "» 🎮حسنـا قم بأرسال الـ API_HASH", filters=filters.text)
+        api_hash_msg = await bot.ask(user_id, "» باشە، بنێرە API_HASH", filters=filters.text)
         if await cancelled(api_hash_msg):
             return
         api_hash = api_hash_msg.text
     if not is_bot:
-        t = "» ✔️الان ارسل رقمك مع رمز دولتك , مثال :+201287585064''"
+        t = "» ✔️ ئێستا ژمارەکەت لەگەڵ کۆدی وڵاتەکەت بنێرە, نموونە :+201287585064''"
     else:
-        t = "ᴩʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ **ʙᴏᴛ_ᴛᴏᴋᴇɴ** ᴛᴏ ᴄᴏɴᴛɪɴᴜᴇ.\nᴇxᴀᴍᴩʟᴇ : `5432198765:abcdanonymousterabaaplol`'"
+        t = "تکایە تۆکنی بۆتەکەت بنێرە بۆ بەردەوامبوون.\نموونە: `5432198765:abcdanonymousterabaaplol`'"
     phone_number_msg = await bot.ask(user_id, t, filters=filters.text)
     if await cancelled(phone_number_msg):
         return
     phone_number = phone_number_msg.text
     if not is_bot:
-        await msg.reply(" انتظر سـوف نـرسـل كـود لحسابك بالتليجـرام .")
+        await msg.reply("چاوەڕوان بن، کۆدێک بۆ ئەکاونتی تێلێگرامەکەت دەنێرین.")
     else:
-        await msg.reply("» ᴛʀʏɪɴɢ ᴛᴏ ʟᴏɢɪɴ ᴠɪᴀ ʙᴏᴛ ᴛᴏᴋᴇɴ...")
+        await msg.reply("» هەوڵدان بۆ چوونە ژوورەوە لە ڕێگەی بۆت تۆکن...")
     if telethon and is_bot:
         client = TelegramClient(StringSession(), api_id, api_hash)
     elif telethon:
@@ -107,7 +107,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             else:
                 code = await client.send_code(phone_number)
     except (ApiIdInvalid, ApiIdInvalidError):
-        await msg.reply("» ʏᴏᴜʀ **ᴀᴩɪ_ɪᴅ** ᴀɴᴅ **ᴀᴩɪ_ʜᴀsʜ** ᴄᴏᴍʙɪɴᴀᴛɪᴏɴ ᴅᴏᴇsɴ'ᴛ ᴍᴀᴛᴄʜ ᴡɪᴛʜ ᴛᴇʟᴇɢʀᴀᴍ ᴀᴩᴩs sʏsᴛᴇᴍ. \n\nᴩʟᴇᴀsᴇ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("» هی تۆ **API_ID** و **API_HASH** تێکەڵکردن لەگەڵ سیستەمی ئەپەکانی تەلەگرامدا ناگونجێت. \n\nتکایە دەست بکە بە دروستکردنی دانیشتنەکەت", reply_markup=InlineKeyboardMarkup(gen_button))
         return
     except (PhoneNumberInvalid, PhoneNumberInvalidError):
         await msg.reply("» ᴛʜᴇ **ᴩʜᴏɴᴇ_ɴᴜᴍʙᴇʀ** ʏᴏᴜ'ᴠᴇ sᴇɴᴛ ᴅᴏᴇsɴ'ᴛ ʙᴇʟᴏɴɢ ᴛᴏ ᴀɴʏ ᴛᴇʟᴇɢʀᴀᴍ ᴀᴄᴄᴏᴜɴᴛ.\n\nᴩʟᴇᴀsᴇ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", reply_markup=InlineKeyboardMarkup(gen_button))
