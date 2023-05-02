@@ -62,7 +62,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
         ty += "بۆت"
     await msg.reply(f"» ⚡ ¦ دانیشتنێک دروست بکە **{ty}** ...")
     user_id = msg.chat.id
-    api_id_msg = await bot.ask(user_id, "باشە، بنێرە API_ID\n\nکلیک بکە/skip بەمەبەستی تەواوکردنی کۆدە کە", filters=filters.text)
+    api_id_msg = await bot.ask(user_id, "باشە، بنێرە API_ID\n\nکلیک بکە /skip بەمەبەستی تەواوکردنی کۆدە کە", filters=filters.text)
     if await cancelled(api_id_msg):
         return
     if api_id_msg.text == "/skip":
@@ -136,9 +136,9 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             return
         except (SessionPasswordNeeded, SessionPasswordNeededError):
             try:
-                two_step_msg = await bot.ask(user_id, " ارسل الباسورد الخاص بحسابك .", filters=filters.text, timeout=300)
+                two_step_msg = await bot.ask(user_id, "وشەی نهێنی ئەکاونتەکەت بنێرە", filters=filters.text, timeout=300)
             except TimeoutError:
-                await msg.reply(" تم انتهاء وقت الجلسه 5 دقائق يرجى اعاده استخراج الجلسه من البدايه ..", reply_markup=InlineKeyboardMarkup(gen_button))
+                await msg.reply("کاتی دانیشتنەکە 5 خولەکه تەواو بووە، تکایە دانیشتنەکە لە سەرەتاوە دەربهێننەوە", reply_markup=InlineKeyboardMarkup(gen_button))
                 return
             try:
                 password = two_step_msg.text
@@ -149,7 +149,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
                 if await cancelled(api_id_msg):
                     return
             except (PasswordHashInvalid, PasswordHashInvalidError):
-                await two_step_msg.reply("» ᴛʜᴇ ᴩᴀssᴡᴏʀᴅ ʏᴏᴜ'ᴠᴇ sᴇɴᴛ ɪs ᴡʀᴏɴɢ.\n\nᴩʟᴇᴀsᴇ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
+                await two_step_msg.reply("» ئەو وشەی نهێنیەی کە ناردووتە هەڵەیە\n\nتکایە دەست بکە بە دروستکردنی دانیشتنەکەت.", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
                 return
     else:
         if telethon:
@@ -160,7 +160,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
         string_session = client.session.save()
     else:
         string_session = await client.export_session_string()
-    text = f"**جلستك يبروو {ty} sᴛʀɪɴɢ sᴇssɪᴏɴ** \n\n`{string_session}` \n\n**ɢᴇɴᴇʀᴀᴛᴇᴅ ʙʏ :** @DEV_SAMIR \n🍒 **ɴᴏᴛᴇ :** حافظ عليها ممكن حد يخترقكك بيها\n انضم هناا فضلا @FTTUTY 🥺"
+    text = f"**دانیشتنەکەت {ty} String session** \n\n`{string_session}` \n\n**دروستکراوە لەلایەن :** @SARKAUT \n **تێبینی :** بیهێڵەرەوە، لای خۆت چۆنکە کەسێک دەتوانێت پێی هاکت بکات\n لێرە بەشداربە تکایە @ChanallBots"
     try:
         if not is_bot:
             await client.send_message("me", text)
@@ -169,20 +169,20 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
     except KeyError:
         pass
     await client.disconnect()
-    await bot.send_message(msg.chat.id, "» ✅تم استخراج الجلسه بنجاح ️ {} .\n\n🔍من فضلك اذهب الي الرسايل المحفوظه بحسابك!  ! \n\n**ᴀ sᴛʀɪɴɢ ɢᴇɴᴇʀᴀᴛᴏʀ ʙᴏᴛ ʙʏ** @DEV_SAMIR 🥺".format("ᴛᴇʟᴇᴛʜᴏɴ" if telethon else "ᴩʏʀᴏɢʀᴀᴍ"))
+    await bot.send_message(msg.chat.id, "» ✅ ️دانیشتنەکە بە سەرکەوتوویی دەرهێنرا {} .\n\n🔍تکایە بڕۆ بۆ ئەو نامانەی کە لە ئەکاونتەکەتدا سەیڤ کراون!  ! \n\n**بۆتێکی مۆلیدەی ڕیز لەلایەن** @SARKAUT ".format("تیلیتۆن" if telethon else "پیرۆگرام"))
 
 
 async def cancelled(msg):
     if "/cancel" in msg.text:
-        await msg.reply("** تم تنفيـذ طـلبگ آنتهہ‏‏ت آلعمـليـهہ‏‏ لبدآيـ‏‏هہ آگتب /start !**", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("** داواکاریەکەت تەواو بوو پرۆسەکە تەواو بوو بۆ دەستپێکردن بنووسە /start !**", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
         return True
     elif "/restart" in msg.text:
-        await msg.reply("**» تمـ آعآدهہ‏‏ آلتشـغيـل مـن تآنيـﮯ يـبرو !**", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("**» دووبارە دەستی پێکردووەتەوە  !**", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
         return True
     elif "/skip" in msg.text:
         return False
     elif msg.text.startswith("/"):  # Bot Commands
-        await msg.reply("**» ᴄᴀɴᴄᴇʟʟᴇᴅ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀɪɴɢ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴩʀᴏᴄᴇss !**", quote=True)
+        await msg.reply("**» پرۆسەی درووستکردنی ڕستەی بەردەوامی گەنسڵ کرد !**", quote=True)
         return True
     else:
         return False
